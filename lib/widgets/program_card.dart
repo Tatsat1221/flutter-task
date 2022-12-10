@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task/models/program_model.dart';
 
 class ProgramCard extends StatelessWidget {
-  const ProgramCard({super.key});
+  final ProgramModel programModel;
+  const ProgramCard({super.key, required this.programModel});
 
   @override
   Widget build(BuildContext context) {
@@ -17,21 +19,21 @@ class ProgramCard extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Text("LIFESTYLE",
+          Text(programModel.category,
               style: TextStyle(
                 color: Colors.blue,
               )),
           SizedBox(
             height: 10,
           ),
-          Text("A complete guide for your new born baby",
+          Text(programModel.name,
               style: TextStyle(
                 color: Colors.black,
               )),
           SizedBox(
             height: 10,
           ),
-          Text("16 Lessons",
+          Text("${programModel.lesson} Lessons",
               style: TextStyle(
                 color: Colors.grey,
               )),

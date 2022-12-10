@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task/models/event_models.dart';
 
 class ProgramCard2 extends StatelessWidget {
-  const ProgramCard2({super.key});
+  final EventModel eventModel;
+  const ProgramCard2({super.key,required this.eventModel});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class ProgramCard2 extends StatelessWidget {
             height: 10,
           ),
           Text(
-            "LIFESTYLE",
+            eventModel.category,
             style: TextStyle(
               color: Colors.blue,
             ),
@@ -26,14 +28,14 @@ class ProgramCard2 extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Text("A complete guide for your new born baby",
+          Text(eventModel.name,
               style: TextStyle(
                 color: Colors.black,
               )),
           SizedBox(
             height: 10,
           ),
-          Text("16 Lessons",
+          Text("${eventModel.duration} Durations",
               style: TextStyle(
                 color: Colors.grey,
               )),

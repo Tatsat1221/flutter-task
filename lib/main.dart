@@ -1,6 +1,10 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_task/models/event_models.dart';
+import 'package:flutter_task/models/program_model.dart';
+import 'package:flutter_task/services/api_services.dart';
 import 'package:flutter_task/widgets/program_card.dart';
 import 'package:flutter_task/widgets/program_card1.dart';
 import 'package:flutter_task/widgets/program_card2.dart';
@@ -33,9 +37,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<ProgramModel> programmodel = [];
+  List<EventModel> eventmodel = [];
+  _fetchApiData() async {
+    programmodel = await ApiServices.fetchProgramFromApi();
+    eventmodel = await ApiServices.fetchEventFromApi();
+    if (mounted) {
+      setState(() {
+        log(programmodel.length.toString());
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _fetchApiData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -43,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Icons.menu,
           color: Colors.black,
         ),
-        actions: [
+        actions: const [
           Icon(
             Icons.message,
             color: Colors.black,
@@ -72,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Padding(
+                        const Padding(
                           padding:
                               EdgeInsets.only(top: 9, bottom: 5, right: 190),
                           child: Text(
@@ -83,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 fontWeight: FontWeight.w800),
                           ),
                         ),
-                        Padding(
+                        const Padding(
                             padding:
                                 EdgeInsets.only(top: 5, bottom: 10, right: 100),
                             child: Text("What do you wanna learn today?",
@@ -91,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w700))),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Row(
@@ -106,19 +128,19 @@ class _MyHomePageState extends State<MyHomePage> {
                                     decoration: BoxDecoration(
                                         color: Colors.white,
                                         border: Border.all(color: Colors.blue),
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(10.0))),
                                     child: Row(
                                       children: [
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Image.asset("images/Icon5.png"),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
-                                        new Center(
-                                          child: new Text(
+                                        const Center(
+                                          child: Text(
                                             "Programs",
                                             style: TextStyle(
                                                 color: Colors.blue,
@@ -138,21 +160,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                   decoration: BoxDecoration(
                                       color: Colors.white,
                                       border: Border.all(color: Colors.blue),
-                                      borderRadius: BorderRadius.all(
+                                      borderRadius: const BorderRadius.all(
                                           Radius.circular(10.0))),
                                   child: Row(children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Image.asset(
                                       "images/images1.jpeg",
                                       height: 20,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
-                                    new Center(
-                                      child: new Text(
+                                    const Center(
+                                      child: Text(
                                         "Get Help",
                                         style: TextStyle(
                                             color: Colors.blue, fontSize: 15),
@@ -163,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               )
                             ]),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -178,22 +200,22 @@ class _MyHomePageState extends State<MyHomePage> {
                                     decoration: BoxDecoration(
                                         color: Colors.white,
                                         border: Border.all(color: Colors.blue),
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(10.0))),
                                     child: Row(
                                       children: [
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Image.asset(
                                           "images/Icon1.png",
                                           color: Colors.blue,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
-                                        new Center(
-                                          child: new Text(
+                                        const Center(
+                                          child: Text(
                                             "Learn",
                                             style: TextStyle(
                                                 color: Colors.blue,
@@ -213,21 +235,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                   decoration: BoxDecoration(
                                       color: Colors.white,
                                       border: Border.all(color: Colors.blue),
-                                      borderRadius: BorderRadius.all(
+                                      borderRadius: const BorderRadius.all(
                                           Radius.circular(10.0))),
                                   child: Row(children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Image.asset(
                                       "images/trello.png",
                                       height: 20,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
-                                    new Center(
-                                      child: new Text(
+                                    const Center(
+                                      child: Text(
                                         "DD Tracker",
                                         style: TextStyle(
                                             color: Colors.blue, fontSize: 15),
@@ -241,13 +263,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
+                        const Text(
                           "Programs for you",
                           style: TextStyle(fontSize: 15),
                         ),
@@ -257,7 +279,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         Image.asset("images/Icon4.png")
                       ]),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Column(
@@ -267,79 +289,86 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 250,
                         width: MediaQuery.of(context).size.width,
                         child: ListView.builder(
-                          itemCount: 10,
+                          itemCount:
+                              programmodel != null ? programmodel.length : 0,
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return ProgramCard();
+                            return ProgramCard(
+                              programModel: programmodel[index],
+                            );
                           },
                         ),
                       ),
                       //Padding(padding: EdgeInsets.only(bottom: 0.0, left: 10)),
 
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(
+                            const Text(
                               "Events and Experience",
                               style: TextStyle(fontSize: 15),
                             ),
-                            Padding(padding: EdgeInsets.only(left: 160)),
+                            const Padding(padding: EdgeInsets.only(left: 160)),
                             Container(
-                              child: Text("View all"),
+                              child: const Text("View all"),
                             ),
                             Image.asset("images/Icon4.png")
                           ]),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Container(
                         height: 250,
                         width: MediaQuery.of(context).size.width,
                         child: ListView.builder(
-                          itemCount: 10,
+                          itemCount: eventmodel != null ? eventmodel.length : 0,
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return ProgramCard1();
+                            return ProgramCard1(
+                              eventModel: eventmodel[index],
+                            );
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(
+                            const Text(
                               "Events and Experience",
                               style: TextStyle(fontSize: 15),
                             ),
-                            Padding(padding: EdgeInsets.only(left: 160)),
+                            const Padding(padding: EdgeInsets.only(left: 160)),
                             Container(
-                              child: Text("View all"),
+                              child: const Text("View all"),
                             ),
                             Image.asset("images/Icon4.png")
                           ]),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Container(
                         height: 250,
                         width: MediaQuery.of(context).size.width,
                         child: ListView.builder(
-                          itemCount: 10,
+                          itemCount: eventmodel != null ? eventmodel.length : 0,
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return ProgramCard2();
+                            return ProgramCard2(
+                              eventModel: eventmodel[index],
+                            );
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 80,
                       ),
                     ],
